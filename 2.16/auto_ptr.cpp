@@ -41,13 +41,14 @@ public:
 	{
 		delete obj;
 	}
-	myptr& operator=(T& a)
+	myptr& operator=(myptr& a)
 	{
-		obj = a;
-		a = nullptr;
+		delete obj;
+		obj = a.obj;
+		a.obj = nullptr;
 		return *this;
 	}
-	T* operator*()
+	T& operator*()
 	{
 		return *obj;
 	}
@@ -79,5 +80,6 @@ int main()
 	myptr<tool> ptr2(b);
 	myptr<tool> ptr3;
 	ptr3 = ptr2;
+	cout << "hh" << endl;
 	return 0;
 }
