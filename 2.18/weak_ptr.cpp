@@ -207,6 +207,7 @@ public:
 	{
 		myshared_ptr<T> tem;
 		tem.obj = obj;
+		tem.obj->increase();
 		return tem;
 	}
 	void reset(myweak_ptr& a=nullptr)
@@ -253,13 +254,8 @@ int main()
 	myshared_ptr<char> ptr1(a);
 	cout << ptr1.my_count() << endl;
 	myweak_ptr<char> pre(ptr1);
-	myshared_ptr<char> ptr3(pre.lock());
+	pre.lock();
 	cout << ptr1.my_count() << endl;
-	/*char* b = new char[10];
-	shared_ptr<char> s(b);
-	weak_ptr<char> w(s);
-	shared_ptr<char> s2=w.lock();
-	cout << s.use_count() << endl;*/
 	return 0;
 }
 
